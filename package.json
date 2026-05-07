@@ -1,0 +1,26 @@
+{
+  "name": "carstoon",
+  "version": "1.0.0",
+  "description": "Servicio de personalizacion, venta y arrendamiento de autos con varios diseños",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sagaz-15/CARSTOON.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/sagaz-15/CARSTOON/issues"
+  },
+  "homepage": "https://github.com/sagaz-15/CARSTOON#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "mssql": "^12.5.2"
+  }
+}
