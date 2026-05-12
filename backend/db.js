@@ -1,13 +1,16 @@
-const sql = require('mssql')
+require('dotenv').config()
+
+const sql = require('mssql/msnodesqlv8')
 
 const config = {
-    user: process.env.DB_USER || 'sa',
-    password: process.env.DB_PASSWORD || '123456',
-    server: process.env.DB_SERVER || 'localhost',
-    database: process.env.DB_NAME || 'CARSTOON',
+    connectionString:
+        `Driver={ODBC Driver 17 for SQL Server};` +
+        `Server=${process.env.DB_SERVER};` +
+        `Database=${process.env.DB_DATABASE};` +
+        `Trusted_Connection=Yes;`,
+
     options: {
-        trustServerCertificate: true,
-        encrypt: false
+        trustServerCertificate: true
     }
 }
 
@@ -16,8 +19,8 @@ async function connectDB() {
         await sql.connect(config)
         console.log('✅ Conectado a SQL Server exitosamente')
     } catch (err) {
-        console.error('❌ Error al conectar a SQL Server:', err.message)
-        // No cerramos el proceso para permitir desarrollo sin BD
+        console.error('❌ Error completo:')
+        console.log(err)
     }
 }
 
