@@ -1,55 +1,128 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=}, initial-scale=1.0">
-    <title>CARSTOONS</title>
-    <link rel="stylesheet" href="Style/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CARSTOONS — Catálogo de Autos</title>
+  <link rel="stylesheet" href="Style/style.css">
+  <style>
+    .badge {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      padding: .2rem .6rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      margin-bottom: .5rem;
+    }
+    .car-card-body h3 { color: var(--white); }
+    .car-tag {
+      font-size: .78rem;
+      color: var(--red);
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: .3rem;
+      display: block;
+    }
+  </style>
 </head>
 <body>
-   
-        <header>
 
-        <h1>CARSTOONS</h1>
-        <nav>
-            <ul>
-                <li><a href="Inicio.html">INICIO</a></li>
-                <li><a href="Cars.html">CARROS</a></li>
-                <li><a href="Service.html">SERVICIO</a></li>
-                <li><a href="Branches.html">SUCURSALES</a></li>
-                <li><a href="About.html">NOSOTROS</a></li>
-                <li><a href="Contact.html">CONTACTO</a></li>
-                <li><a href="proxi.html">PRONTO</a></li>
-                <li><a href="Login.html">INICIAR SESIÓN</a></li>
-                <li><a href="Registro.html">REGISTRARSE</a></li>
-            </ul>
-    </header>
+  <header>
+    <h1>CAR<span>S</span>TOONS</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">INICIO</a></li>
+        <li><a href="Cars.html">CARROS</a></li>
+        <li><a href="Service.html">SERVICIO</a></li>
+        <li><a href="Branches.html">SUCURSALES</a></li>
+        <li><a href="About.html">NOSOTROS</a></li>
+        <li><a href="Contact.html">CONTACTO</a></li>
+        <li><a href="Login.html">INICIAR SESIÓN</a></li>
+        <li><a href="Registro.html">REGISTRARSE</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <main>
-        <h2>Nuestros Autos</h2>
-        <p>Explora nuestra selección de autos personalizados con diseños únicos.</p>
+  <main>
+    <h2>NUESTROS AUTOS</h2>
+    <p>Explora nuestra selección de vehículos personalizados. Cada uno es una obra de arte única, diseñada con pasión y precisión. Haz clic en cualquier auto para conocer más detalles y agendar tu visita.</p>
 
-        <img src="style/MCQeen.jpg" alt="Auto 1" width="300" height="200">
-        <h3>Auto Deportivo MCQUEEN Personalizado</h3>
-        <p>Un auto deportivo con un diseño personalizado que combina estilo y rendimiento.</p>
-        <img src="style/Deluxo.jpg" alt="Auto 2" width="300" height="200">
-        <h3>Auto Clásico DELUXO Personalizado</h3>
-        <p>Un auto clásico con un diseño personalizado que resalta su elegancia y encanto vintage.</p>
-        <img src="style/Gumball.jpg" alt="Auto 3" width="300" height="200">
-        <h3>Auto Familiar Gumball Personalizado</h3>
-        <p>Un auto familiar con un diseño personalizado que ofrece comodidad y estilo para toda la familia.</p>
-        <img src="style/DRAGON.jpg" alt="Auto 4" width="300" height="200">
-        <h3>Auto Eléctrico DRAGON BALL Personalizado</h3>
-        <p>Un auto eléctrico con un diseño personalizado que combina innovación y sostenibilidad.</p>
-        <img src="style/Halo.jpg" alt="Auto 5" width="300" height="200">
-        <h3>Camioneta HALO Personalizado</h3>
-        <p>Un camioneta con un diseño personalizado que ofrece versatilidad y estilo para cualquier aventura.</p>
-        <img src="style/Jujutsu.jpg" alt="Auto 6" width="300" height="200">
-        <h3>Auto de Lujo JUJUTSU KAISEN Personalizado</h3>
-        <p>Un auto de lujo con un diseño personalizado que refleja elegancia y exclusividad.</p>
-        <img src="style/Miku.jpg" alt="Auto 7" width="300" height="200">
-        <h3>Auto Deportivo MIKU Personalizado</h3>
-        <p>Un auto deportivo con un diseño personalizado que combina velocidad y sostenibilidad.</p>
-    </main>
+    <div class="catalog-grid">
+
+      <div class="car-card">
+        <img src="style/MCQeen.jpg" alt="Auto McQueen">
+        <div class="car-card-body">
+          <span class="badge">Deportivo</span>
+          <h3>MCQUEEN Personalizado</h3>
+          <p>Un auto deportivo que combina estilo cinematográfico y alto rendimiento en cada curva.</p>
+        </div>
+      </div>
+
+      <div class="car-card">
+        <img src="style/Deluxo.jpg" alt="Auto Deluxo">
+        <div class="car-card-body">
+          <span class="badge">Clásico</span>
+          <h3>DELUXO Personalizado</h3>
+          <p>Elegancia vintage reinventada con un diseño personalizado que resalta su encanto atemporal.</p>
+        </div>
+      </div>
+
+      <div class="car-card">
+        <img src="style/Gumball.jpg" alt="Auto Gumball">
+        <div class="car-card-body">
+          <span class="badge">Familiar</span>
+          <h3>GUMBALL Personalizado</h3>
+          <p>Comodidad y estilo para toda la familia, con un diseño divertido y lleno de color.</p>
+        </div>
+      </div>
+
+      <div class="car-card">
+        <img src="style/DRAGON.jpg" alt="Auto Dragon Ball">
+        <div class="car-card-body">
+          <span class="badge">Eléctrico</span>
+          <h3>DRAGON BALL Personalizado</h3>
+          <p>Innovación y sostenibilidad fusionadas con un diseño épico inspirado en el anime.</p>
+        </div>
+      </div>
+
+      <div class="car-card">
+        <img src="style/Halo.jpg" alt="Camioneta Halo">
+        <div class="car-card-body">
+          <span class="badge">Camioneta</span>
+          <h3>HALO Personalizado</h3>
+          <p>Versatilidad y potencia con un diseño futurista inspirado en el universo de Halo.</p>
+        </div>
+      </div>
+
+      <div class="car-card">
+        <img src="style/Jujutsu.jpg" alt="Auto Jujutsu Kaisen">
+        <div class="car-card-body">
+          <span class="badge">Lujo</span>
+          <h3>JUJUTSU KAISEN Personalizado</h3>
+          <p>Elegancia y exclusividad para los amantes del anime y el lujo sobre ruedas.</p>
+        </div>
+      </div>
+
+      <div class="car-card">
+        <img src="style/Miku.jpg" alt="Auto Miku">
+        <div class="car-card-body">
+          <span class="badge">Deportivo</span>
+          <h3>MIKU Personalizado</h3>
+          <p>Velocidad, color y personalidad única en un auto que no pasa desapercibido.</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 CARSTOONS — Todos los derechos reservados &nbsp;|&nbsp; Medellín, Colombia</p>
+  </footer>
+
 </body>
 </html>

@@ -1,29 +1,217 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CARSTOON</title>
-    <link rel="stylesheet" href="Style/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CARSTOONS — Personalización Automotriz</title>
+  <link rel="stylesheet" href="Style/style.css">
+  <style>
+    .cta-btn {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 3px;
+      padding: .75rem 2.2rem;
+      border-radius: 4px;
+      text-decoration: none;
+      margin: .4rem;
+      transition: .25s;
+      box-shadow: 0 0 18px var(--red-glow);
+    }
+    .cta-btn:hover { background: var(--red-dark); transform: translateY(-2px); }
+    .cta-btn.outline {
+      background: transparent;
+      border: 2px solid var(--red);
+      color: var(--red);
+      box-shadow: none;
+    }
+    .cta-btn.outline:hover { background: rgba(232,28,28,.12); }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin: 3rem 0;
+      text-align: center;
+    }
+    .stat-box {
+      background: var(--dark2);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--red);
+      padding: 2rem 1rem;
+      border-radius: 6px;
+    }
+    .stat-box .num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: var(--red);
+      line-height: 1;
+    }
+    .stat-box p { margin: .4rem 0 0; font-size: .9rem; color: var(--gray); letter-spacing: 2px; text-transform: uppercase; }
+
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 3rem 0;
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .preview-card {
+      background: var(--dark2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: .3s;
+    }
+    .preview-card:hover {
+      border-color: var(--red);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px var(--red-glow);
+    }
+    .preview-card img {
+      width: 100%; height: 180px; object-fit: cover; display: block; transition: .4s;
+    }
+    .preview-card:hover img { transform: scale(1.06); }
+    .preview-card-body { padding: 1rem 1.2rem; }
+    .preview-card-body h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: var(--red); letter-spacing: 2px; margin-bottom: .3rem; }
+    .preview-card-body p { color: #aaa; font-size: .88rem; margin: 0; }
+
+    .services-mini { display: grid; grid-template-columns: repeat(2,1fr); gap: 1rem; margin-top: 1.5rem; }
+    .service-mini-card {
+      background: var(--dark2);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--red);
+      padding: 1.2rem 1.4rem;
+      border-radius: 6px;
+    }
+    .service-mini-card h4 { color: var(--white); font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 2px; margin-bottom: .3rem; }
+    .service-mini-card p { color: #999; font-size: .88rem; margin: 0; }
+
+    @media (max-width: 768px) {
+      .stats-row, .preview-grid { grid-template-columns: 1fr; }
+      .services-mini { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
-    <header>
+  <header>
+    <h1>CAR<span>S</span>TOONS</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">INICIO</a></li>
+        <li><a href="Cars.html">CARROS</a></li>
+        <li><a href="Service.html">SERVICIO</a></li>
+        <li><a href="Branches.html">SUCURSALES</a></li>
+        <li><a href="About.html">NOSOTROS</a></li>
+        <li><a href="Contact.html">CONTACTO</a></li>
+        <li><a href="Login.html">INICIAR SESIÓN</a></li>
+        <li><a href="Registro.html">REGISTRARSE</a></li>
+      </ul>
+    </nav>
+  </header>
 
-        <h1>CARSTOONS</h1>
-        <nav>
-            <ul>
-                <li><a href="Inicio.html">INICIO</a></li>
-                <li><a href="Cars.html">CARROS</a></li>
-                <li><a href="Service.html">SERVICIO</a></li>
-                <li><a href="Branches.html">SUCURSALES</a></li>
-                <li><a href="About.html">NOSOTROS</a></li>
-                <li><a href="Contact.html">CONTACTO</a></li>
-                <li><a href="Proxi.html">PRONTO</a></li>
-                <li><a href="Login.html">INICIAR SESIÓN</a></li>
-                <li><a href="Registro.html">REGISTRARSE</a></li>
-            </ul>
-    </header>
-    
+  <main>
+    <!-- HERO -->
+    <section class="hero-section">
+      <h1>BIENVENIDOS A CARSTOONS</h1>
+      <h2>PERSONALIZACIÓN AUTOMOTRIZ SIN LÍMITES</h2>
+      <p>Transformamos tu vehículo en una obra de arte. Diseños únicos, modificaciones mecánicas y una experiencia de compra excepcional te esperan en CARSTOONS.</p>
+      <a href="Cars.html" class="cta-btn">VER CATÁLOGO</a>
+      <a href="Contact.html" class="cta-btn outline">CONTÁCTANOS</a>
+
+      <div class="hero-img-wrap">
+        <img src="style/Batimovil.jpg" alt="Chevrolet Impala Batman — CARSTOONS">
+        <div class="caption">CHEVROLET IMPALA — EDICIÓN BATMAN &nbsp;|&nbsp; CARSTOONS SIGNATURE BUILD</div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <div class="stats-row">
+      <div class="stat-box">
+        <div class="num">7+</div>
+        <p>Modelos en Catálogo</p>
+      </div>
+      <div class="stat-box">
+        <div class="num">3</div>
+        <p>Sucursales en Colombia</p>
+      </div>
+      <div class="stat-box">
+        <div class="num">5</div>
+        <p>Servicios Especializados</p>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- PREVIEW AUTOS -->
+    <h2>AUTOS DESTACADOS</h2>
+    <p>Una muestra de nuestras personalizaciones más icónicas. Cada vehículo es diseñado a medida para reflejar tu estilo.</p>
+    <div class="preview-grid">
+      <div class="preview-card">
+        <img src="style/MCQeen.jpg" alt="McQueen">
+        <div class="preview-card-body">
+          <h3>MCQUEEN Deportivo</h3>
+          <p>Estilo y velocidad en un solo diseño.</p>
+        </div>
+      </div>
+      <div class="preview-card">
+        <img src="style/Deluxo.jpg" alt="Deluxo">
+        <div class="preview-card-body">
+          <h3>DELUXO Clásico</h3>
+          <p>Elegancia vintage reinventada.</p>
+        </div>
+      </div>
+      <div class="preview-card">
+        <img src="style/Miku.jpg" alt="Miku">
+        <div class="preview-card-body">
+          <h3>MIKU Deportivo</h3>
+          <p>Velocidad y personalidad única.</p>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:2rem;">
+      <a href="Cars.html" class="cta-btn">VER TODOS LOS AUTOS</a>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- SERVICIOS MINI -->
+    <h2>LO QUE HACEMOS</h2>
+    <p>Desde el diseño inicial hasta la entrega final, cubrimos cada etapa de la personalización de tu vehículo.</p>
+    <div class="services-mini">
+      <div class="service-mini-card">
+        <h4>🎨 Diseños Personalizados</h4>
+        <p>Gráficos, vinilos y pintura a medida que hacen único tu auto.</p>
+      </div>
+      <div class="service-mini-card">
+        <h4>⚙️ Modificaciones Mecánicas</h4>
+        <p>Motor, escape y rendimiento llevados al siguiente nivel.</p>
+      </div>
+      <div class="service-mini-card">
+        <h4>🔧 Mantenimiento y Reparación</h4>
+        <p>Tu auto siempre en óptimas condiciones con nuestros expertos.</p>
+      </div>
+      <div class="service-mini-card">
+        <h4>🚗 Renta de Autos</h4>
+        <p>Disfruta nuestros vehículos personalizados sin compromiso de compra.</p>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:2rem;">
+      <a href="Service.html" class="cta-btn outline">VER TODOS LOS SERVICIOS</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 CARSTOONS — Todos los derechos reservados &nbsp;|&nbsp; Medellín, Colombia</p>
+  </footer>
+
 </body>
 </html>

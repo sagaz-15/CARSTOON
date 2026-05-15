@@ -1,46 +1,132 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CARSTOONS</title>
-    <link rel="stylesheet" href="Style/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CARSTOONS — Sucursales</title>
+  <link rel="stylesheet" href="Style/style.css">
+  <style>
+    .branch-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      color: var(--red);
+      letter-spacing: 3px;
+      margin-bottom: 1rem;
+    }
+    .branch-card .branch-icon {
+      font-size: 2rem;
+      margin-bottom: .8rem;
+      display: block;
+    }
+    .branch-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: .6rem;
+      margin-bottom: .4rem;
+    }
+    .branch-detail span:first-child { flex-shrink: 0; }
+    .branch-detail span:last-child { color: #bbb; font-size: .93rem; }
+    .branch-label {
+      display: block;
+      font-size: .7rem;
+      letter-spacing: 2px;
+      color: var(--gray);
+      text-transform: uppercase;
+      margin-top: 1.2rem;
+      margin-bottom: .2rem;
+    }
+  </style>
 </head>
 <body>
 
-        <header>
+  <header>
+    <h1>CAR<span>S</span>TOONS</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">INICIO</a></li>
+        <li><a href="Cars.html">CARROS</a></li>
+        <li><a href="Service.html">SERVICIO</a></li>
+        <li><a href="Branches.html">SUCURSALES</a></li>
+        <li><a href="About.html">NOSOTROS</a></li>
+        <li><a href="Contact.html">CONTACTO</a></li>
+        <li><a href="Login.html">INICIAR SESIÓN</a></li>
+        <li><a href="Registro.html">REGISTRARSE</a></li>
+      </ul>
+    </nav>
+  </header>
 
-        <h1>CARSTOONS</h1>
-        <nav>
-            <ul>
-                <li><a href="Inicio.html">INICIO</a></li>
-                <li><a href="Cars.html">CARROS</a></li>
-                <li><a href="Service.html">SERVICIO</a></li>
-                <li><a href="Branches.html">SUCURSALES</a></li>
-                <li><a href="About.html">NOSOTROS</a></li>
-                <li><a href="Contact.html">CONTACTO</a></li>
-                <li><a href="Proxi.html">PRONTO</a></li>
-                <li><a href="Login.html">INICIAR SESIÓN</a></li>
-                <li><a href="Registro.html">REGISTRARSE</a></li>
-            </ul>
-    </header>
-    
+  <main>
+    <h2>NUESTRAS SUCURSALES</h2>
+    <p>Contamos con presencia en las principales ciudades de Colombia para brindarte el mejor servicio cerca de ti. Visítanos y descubre en persona la magia de CARSTOONS.</p>
 
-    <main>
-        <h2>Nuestras Sucursales</h2>
-        <p>Contamos con varias sucursales en diferentes ciudades para brindarte un mejor servicio. Encuentra la sucursal más cercana a ti y visítanos para descubrir nuestros autos personalizados y servicios de personalización.</p>
+    <div class="branches-grid">
 
-        <h3>Sucursal Medellin</h3>
-        <p>Dirección: Cra. 43 # 5-67, Medellín, Antioquia</p>
-        <p>Teléfono: +57 301 123 4567</p>
+      <div class="branch-card">
+        <span class="branch-icon">🏙️</span>
+        <h3>Medellín</h3>
+        <span class="branch-label">Dirección</span>
+        <div class="branch-detail">
+          <span>📍</span>
+          <span>Cra. 43 # 5-67, Medellín, Antioquia</span>
+        </div>
+        <span class="branch-label">Teléfono</span>
+        <div class="branch-detail">
+          <span>📞</span>
+          <span>+57 301 123 4567</span>
+        </div>
+        <span class="branch-label">Horario</span>
+        <div class="branch-detail">
+          <span>🕗</span>
+          <span>Lun – Vie: 8:00 AM – 6:00 PM &nbsp;|&nbsp; Sáb: 9:00 AM – 12:00 PM</span>
+        </div>
+      </div>
 
-        <h3>Sucursal Bogotá</h3>
-        <p>Dirección: Av. 68 # 45-23, Bogotá, Cundinamarca</p>
-        <p>Teléfono: +57 317 234 5678</p>
+      <div class="branch-card">
+        <span class="branch-icon">🏛️</span>
+        <h3>Bogotá</h3>
+        <span class="branch-label">Dirección</span>
+        <div class="branch-detail">
+          <span>📍</span>
+          <span>Av. 68 # 45-23, Bogotá, Cundinamarca</span>
+        </div>
+        <span class="branch-label">Teléfono</span>
+        <div class="branch-detail">
+          <span>📞</span>
+          <span>+57 317 234 5678</span>
+        </div>
+        <span class="branch-label">Horario</span>
+        <div class="branch-detail">
+          <span>🕗</span>
+          <span>Lun – Vie: 8:00 AM – 6:00 PM &nbsp;|&nbsp; Sáb: 9:00 AM – 12:00 PM</span>
+        </div>
+      </div>
 
-        <h3>Sucursal Cali</h3>
-        <p>Dirección: Cl. 5 # 23-45, Cali, Valle del Cauca</p>
-        <p>Teléfono: +57 302 345 6789</p>
-    </main>
+      <div class="branch-card">
+        <span class="branch-icon">🌴</span>
+        <h3>Cali</h3>
+        <span class="branch-label">Dirección</span>
+        <div class="branch-detail">
+          <span>📍</span>
+          <span>Cl. 5 # 23-45, Cali, Valle del Cauca</span>
+        </div>
+        <span class="branch-label">Teléfono</span>
+        <div class="branch-detail">
+          <span>📞</span>
+          <span>+57 302 345 6789</span>
+        </div>
+        <span class="branch-label">Horario</span>
+        <div class="branch-detail">
+          <span>🕗</span>
+          <span>Lun – Vie: 8:00 AM – 6:00 PM &nbsp;|&nbsp; Sáb: 9:00 AM – 12:00 PM</span>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 CARSTOONS — Todos los derechos reservados &nbsp;|&nbsp; Medellín, Colombia</p>
+  </footer>
+
 </body>
 </html>

@@ -1,43 +1,192 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CARSTOONS</title>
-    <link rel="stylesheet" href="Style/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CARSTOONS — Contacto</title>
+  <link rel="stylesheet" href="Style/style.css">
+  <style>
+    .contact-form-group { margin-bottom: 1.2rem; }
+    .contact-form-group label {
+      display: block;
+      font-size: .8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: .4rem;
+    }
+    .contact-form-group input,
+    .contact-form-group textarea,
+    .contact-form-group select {
+      width: 100%;
+      background: var(--dark);
+      border: 1px solid var(--border);
+      color: var(--white);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1rem;
+      padding: .7rem 1rem;
+      border-radius: 4px;
+      outline: none;
+      transition: .2s;
+    }
+    .contact-form-group input:focus,
+    .contact-form-group textarea:focus {
+      border-color: var(--red);
+      box-shadow: 0 0 10px var(--red-glow);
+    }
+    .contact-form-group textarea { min-height: 120px; resize: vertical; }
+    .submit-btn {
+      background: var(--red);
+      color: #fff;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 3px;
+      padding: .8rem 2.5rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: .25s;
+      box-shadow: 0 0 18px var(--red-glow);
+      width: 100%;
+    }
+    .submit-btn:hover { background: var(--red-dark); transform: translateY(-2px); }
+    .contact-detail { display: flex; align-items: flex-start; gap: .7rem; margin-bottom: 1rem; }
+    .contact-detail .icon { font-size: 1.3rem; flex-shrink: 0; margin-top: .1rem; }
+    .contact-detail div label {
+      display: block;
+      font-size: .7rem;
+      letter-spacing: 2px;
+      color: var(--red);
+      text-transform: uppercase;
+      margin-bottom: .1rem;
+    }
+    .contact-detail div span { color: #bbb; font-size: .95rem; }
+    .map-placeholder {
+      background: var(--dark2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2rem;
+      text-align: center;
+      color: var(--gray);
+      font-size: .9rem;
+      margin-top: 1.5rem;
+      letter-spacing: 1px;
+    }
+    .map-placeholder span { display: block; font-size: 2.5rem; margin-bottom: .5rem; }
+  </style>
 </head>
 <body>
-    
-        <header>
 
-        <h1>CARSTOONS</h1>
-        <nav>
-            <ul>
-                <li><a href="Inicio.html">INICIO</a></li>
-                <li><a href="Cars.html">CARROS</a></li>
-                <li><a href="Service.html">SERVICIO</a></li>
-                <li><a href="Branches.html">SUCURSALES</a></li>
-                <li><a href="About.html">NOSOTROS</a></li>
-                <li><a href="Contact.html">CONTACTO</a></li>
-                <li><a href="Proxi.html">PRONTO</a></li>
-                <li><a href="Login.html">INICIAR SESIÓN</a></li>
-                <li><a href="Registro.html">REGISTRARSE</a></li>
-            </ul>
-    </header>
+  <header>
+    <h1>CAR<span>S</span>TOONS</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">INICIO</a></li>
+        <li><a href="Cars.html">CARROS</a></li>
+        <li><a href="Service.html">SERVICIO</a></li>
+        <li><a href="Branches.html">SUCURSALES</a></li>
+        <li><a href="About.html">NOSOTROS</a></li>
+        <li><a href="Contact.html">CONTACTO</a></li>
+        <li><a href="Login.html">INICIAR SESIÓN</a></li>
+        <li><a href="Registro.html">REGISTRARSE</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <main>
-        <h2>Contacto</h2>
-        <p>Si tienes alguna pregunta, comentario o deseas obtener más información sobre nuestros autos personalizados y servicios, no dudes en contactarnos. Estamos aquí para ayudarte y brindarte la mejor experiencia posible.</p>
+  <main>
+    <h2>CONTACTO</h2>
+    <p>¿Tienes preguntas o quieres iniciar tu proyecto de personalización? Estamos aquí para ayudarte. Escríbenos, llámanos o visítanos en cualquiera de nuestras sucursales.</p>
 
-        <h3>Información de Contacto</h3>
-        <p>Correo Electrónico: carstoons@gmail.com</p>
-        <p>Teléfono: +57 300 123 4567</p>
-        <p>Dirección: Cra. 43 # 5-67, Medellín, Antioquia</p>
-       
-        <h3>Horario de Atención</h3>
-        <p>Lunes a Viernes: 8:00 AM - 6:00 PM</p>
-        <p>Sábados: 9:00 AM - 12:00 PM</p>
-        <p>Domingos: Cerrado</p>
-    </main>
+    <div class="contact-grid">
+
+      <!-- Formulario -->
+      <div class="contact-box">
+        <h3>ENVÍANOS UN MENSAJE</h3>
+        <div class="contact-form-group">
+          <label>Nombre completo</label>
+          <input type="text" placeholder="Tu nombre">
+        </div>
+        <div class="contact-form-group">
+          <label>Correo electrónico</label>
+          <input type="email" placeholder="tu@correo.com">
+        </div>
+        <div class="contact-form-group">
+          <label>Asunto</label>
+          <input type="text" placeholder="¿En qué podemos ayudarte?">
+        </div>
+        <div class="contact-form-group">
+          <label>Mensaje</label>
+          <textarea placeholder="Cuéntanos sobre tu proyecto..."></textarea>
+        </div>
+        <button class="submit-btn">ENVIAR MENSAJE</button>
+      </div>
+
+      <!-- Info de contacto -->
+      <div class="contact-box">
+        <h3>INFORMACIÓN DE CONTACTO</h3>
+
+        <div class="contact-detail">
+          <span class="icon">✉️</span>
+          <div>
+            <label>Correo Electrónico</label>
+            <span>carstoons@gmail.com</span>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <span class="icon">📞</span>
+          <div>
+            <label>Teléfono</label>
+            <span>+57 300 123 4567</span>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <span class="icon">📍</span>
+          <div>
+            <label>Sede Principal</label>
+            <span>Cra. 43 # 5-67, Medellín, Antioquia</span>
+          </div>
+        </div>
+
+        <h3 style="margin-top:1.5rem;">HORARIO DE ATENCIÓN</h3>
+
+        <div class="contact-detail">
+          <span class="icon">🕗</span>
+          <div>
+            <label>Lunes a Viernes</label>
+            <span>8:00 AM – 6:00 PM</span>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <span class="icon">🕘</span>
+          <div>
+            <label>Sábados</label>
+            <span>9:00 AM – 12:00 PM</span>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <span class="icon">🚫</span>
+          <div>
+            <label>Domingos</label>
+            <span>Cerrado</span>
+          </div>
+        </div>
+
+        <div class="map-placeholder">
+          <span>🗺️</span>
+          Medellín, Antioquia — Colombia
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 CARSTOONS — Todos los derechos reservados &nbsp;|&nbsp; Medellín, Colombia</p>
+  </footer>
+
 </body>
 </html>
