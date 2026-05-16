@@ -1,9 +1,21 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from db import get_connection
+from datetime import datetime
 
 app = Flask(__name__)
 CORS(app)
+
+# ─── HELPER ──────────────────────────────────────────────────────────────────
+
+def filas_a_dict(cursor):
+    columnas = [col[0] for col in cursor.description]
+    return [dict(zip(columnas, row)) for row in cursor.fetchall()]
+
+def fila_a_dict(cursor):
+    columnas = [col[0] for col in cursor.description]
+    row = cursor.fetchone()
+    return dict(zip(columnas, row)) if row else None
 
 # ─── USUARIOS ────────────────────────────────────────────────────────────────
 
@@ -13,28 +25,11 @@ def get_usuarios():
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute("SELECT id_usuario, nombre, correo_electronico, telefono, ciudad, fecha_registro, activo FROM Usuarios")
-        columnas = [col[0] for col in cursor.description]
-        usuarios = [dict(zip(columnas, row)) for row in cursor.fetchall()]
-        conn.close()
-        return jsonify(usuarios)
+        return jsonify(filas_a_dict(cursor))
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
-
-@app.route('/usuarios/<int:id>', methods=['GET'])
-def get_usuario(id):
-    try:
-        conn = get_connection()
-        cursor = conn.cursor()
-        cursor.execute("SELECT id_usuario, nombre, correo_electronico, telefono, ciudad FROM Usuarios WHERE id_usuario = ?", id)
-        columnas = [col[0] for col in cursor.description]
-        row = cursor.fetchone()
+    finally:
         conn.close()
-        if not row:
-            return jsonify({'error': 'Usuario no encontrado'}), 404
-        return jsonify(dict(zip(columnas, row)))
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
 
 
 @app.route('/usuarios/registro', methods=['POST'])
@@ -47,12 +42,15 @@ def registrar_usuario():
             INSERT INTO Usuarios (nombre, correo_electronico, contraseña, telefono, direccion, ciudad)
             VALUES (?, ?, ?, ?, ?, ?)
         """, data['nombre'], data['correo_electronico'], data['contraseña'],
-             data.get('telefono'), data.get('direccion'), data.get('ciudad'))
+             data.get('telefono', ''), data.get('direccion', ''), data.get('ciudad', ''))
         conn.commit()
-        conn.close()
         return jsonify({'mensaje': 'Usuario registrado correctamente'}), 201
     except Exception as e:
+        if '2627' in str(e) or 'UNIQUE' in str(e).upper():
+            return jsonify({'error': 'El correo ya está registrado'}), 409
         return jsonify({'error': str(e)}), 500
+    finally:
+        conn.close()
 
 
 @app.route('/usuarios/login', methods=['POST'])
@@ -62,19 +60,34 @@ def login():
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute("""
-            SELECT id_usuario, nombre, correo_electronico, ciudad
+            SELECT id_usuario, nombre, correo_electronico, ciudad, telefono
             FROM Usuarios
             WHERE correo_electronico = ? AND contraseña = ? AND activo = 1
         """, data['correo_electronico'], data['contraseña'])
-        columnas = [col[0] for col in cursor.description]
-        row = cursor.fetchone()
-        conn.close()
-        if not row:
-            return jsonify({'error': 'Credenciales incorrectas'}), 401
-        return jsonify({'mensaje': 'Login exitoso', 'usuario': dict(zip(columnas, row))})
+        usuario = fila_a_dict(cursor)
+        if not usuario:
+            return jsonify({'error': 'Correo o contraseña incorrectos'}), 401
+        return jsonify({'mensaje': 'Login exitoso', 'usuario': usuario})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    finally:
+        conn.close()
 
+
+@app.route('/usuarios/<int:id>', methods=['GET'])
+def get_usuario(id):
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT id_usuario, nombre, correo_electronico, telefono, ciudad FROM Usuarios WHERE id_usuario = ?", id)
+        usuario = fila_a_dict(cursor)
+        if not usuario:
+            return jsonify({'error': 'Usuario no encontrado'}), 404
+        return jsonify(usuario)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    finally:
+        conn.close()
 
 # ─── VEHÍCULOS ───────────────────────────────────────────────────────────────
 
@@ -84,12 +97,11 @@ def get_vehiculos():
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM Vehiculos WHERE disponible = 1")
-        columnas = [col[0] for col in cursor.description]
-        vehiculos = [dict(zip(columnas, row)) for row in cursor.fetchall()]
-        conn.close()
-        return jsonify(vehiculos)
+        return jsonify(filas_a_dict(cursor))
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    finally:
+        conn.close()
 
 
 @app.route('/vehiculos/<int:id>', methods=['GET'])
@@ -98,15 +110,14 @@ def get_vehiculo(id):
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM Vehiculos WHERE id_vehiculo = ?", id)
-        columnas = [col[0] for col in cursor.description]
-        row = cursor.fetchone()
-        conn.close()
-        if not row:
+        v = fila_a_dict(cursor)
+        if not v:
             return jsonify({'error': 'Vehículo no encontrado'}), 404
-        return jsonify(dict(zip(columnas, row)))
+        return jsonify(v)
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
+    finally:
+        conn.close()
 
 # ─── SERVICIOS ───────────────────────────────────────────────────────────────
 
@@ -122,13 +133,11 @@ def get_servicios():
             JOIN Especializaciones e ON s.id_especializacion = e.id_especializacion
             WHERE s.activo = 1
         """)
-        columnas = [col[0] for col in cursor.description]
-        servicios = [dict(zip(columnas, row)) for row in cursor.fetchall()]
-        conn.close()
-        return jsonify(servicios)
+        return jsonify(filas_a_dict(cursor))
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
+    finally:
+        conn.close()
 
 # ─── MECÁNICOS ───────────────────────────────────────────────────────────────
 
@@ -144,13 +153,11 @@ def get_mecanicos():
             JOIN Especializaciones e ON m.id_especializacion_principal = e.id_especializacion
             WHERE m.disponible = 1
         """)
-        columnas = [col[0] for col in cursor.description]
-        mecanicos = [dict(zip(columnas, row)) for row in cursor.fetchall()]
-        conn.close()
-        return jsonify(mecanicos)
+        return jsonify(filas_a_dict(cursor))
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
+    finally:
+        conn.close()
 
 # ─── ÓRDENES ─────────────────────────────────────────────────────────────────
 
@@ -159,13 +166,17 @@ def get_ordenes_cliente(id):
     try:
         conn = get_connection()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM Ordenes WHERE id_cliente = ? ORDER BY fecha_creacion DESC", id)
-        columnas = [col[0] for col in cursor.description]
-        ordenes = [dict(zip(columnas, row)) for row in cursor.fetchall()]
-        conn.close()
-        return jsonify(ordenes)
+        cursor.execute("""
+            SELECT id_orden, tipo_orden, estado, descripcion, fecha_creacion, costo_total
+            FROM Ordenes
+            WHERE id_cliente = ?
+            ORDER BY fecha_creacion DESC
+        """, id)
+        return jsonify(filas_a_dict(cursor))
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    finally:
+        conn.close()
 
 
 @app.route('/ordenes/renta', methods=['POST'])
@@ -175,36 +186,124 @@ def crear_orden_renta():
         conn = get_connection()
         cursor = conn.cursor()
 
-        from datetime import datetime
         fecha_inicio = datetime.fromisoformat(data['fecha_inicio'])
         fecha_fin    = datetime.fromisoformat(data['fecha_fin'])
         dias         = max((fecha_fin - fecha_inicio).days, 1)
-        costo_total  = dias * float(data['precio_por_dia'])
+        precio_dia   = float(data['precio_por_dia'])
+        costo_total  = dias * precio_dia
 
-        # Insertar orden maestra
         cursor.execute("""
             INSERT INTO Ordenes (id_cliente, tipo_orden, estado, descripcion, costo_total)
             OUTPUT INSERTED.id_orden
             VALUES (?, 'renta', 'pendiente', ?, ?)
-        """, data['id_cliente'], data.get('descripcion', 'Renta de vehículo'), costo_total)
+        """, data['id_cliente'],
+             f"Renta de {data.get('nombre_vehiculo', 'vehículo')} por {dias} día(s)",
+             costo_total)
         id_orden = cursor.fetchone()[0]
 
-        # Insertar orden de renta
         cursor.execute("""
             INSERT INTO OrdenesRenta (id_orden, id_vehiculo, fecha_inicio, fecha_fin, precio_por_dia, monto_deposito)
             VALUES (?, ?, ?, ?, ?, ?)
         """, id_orden, data['id_vehiculo'], fecha_inicio, fecha_fin,
-             data['precio_por_dia'], data.get('monto_deposito', 0))
+             precio_dia, data.get('monto_deposito', precio_dia))
 
-        # Marcar vehículo no disponible
         cursor.execute("UPDATE Vehiculos SET disponible = 0 WHERE id_vehiculo = ?", data['id_vehiculo'])
 
         conn.commit()
-        conn.close()
-        return jsonify({'mensaje': 'Orden de renta creada', 'id_orden': id_orden, 'costo_total': costo_total}), 201
+        return jsonify({
+            'mensaje': 'Orden de renta creada',
+            'id_orden': id_orden,
+            'costo_total': costo_total,
+            'dias': dias
+        }), 201
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    finally:
+        conn.close()
 
+
+@app.route('/ordenes/personalizacion', methods=['POST'])
+def crear_orden_personalizacion():
+    data = request.json
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        ids_servicios = data['id_servicios']
+        placeholders  = ','.join(['?' for _ in ids_servicios])
+        cursor.execute(
+            f"SELECT id_servicio, costo FROM Servicios WHERE id_servicio IN ({placeholders})",
+            *ids_servicios
+        )
+        servicios_rows = filas_a_dict(cursor)
+        costo_total = sum(float(s['costo']) for s in servicios_rows)
+
+        fecha_inicio  = datetime.now()
+        fecha_fin_est = datetime.fromisoformat(data['fecha_fin_estimada']) if data.get('fecha_fin_estimada') else None
+
+        cursor.execute("""
+            INSERT INTO Ordenes (id_cliente, tipo_orden, estado, descripcion, costo_total)
+            OUTPUT INSERTED.id_orden
+            VALUES (?, 'personalizacion', 'pendiente', ?, ?)
+        """, data['id_cliente'], data.get('descripcion', 'Personalización de vehículo'), costo_total)
+        id_orden = cursor.fetchone()[0]
+
+        cursor.execute("""
+            INSERT INTO OrdenesPersonalizacion (id_orden, id_vehiculo_cliente, id_mecanico, fecha_inicio, fecha_fin_estimada)
+            OUTPUT INSERTED.id_orden_personalizacion
+            VALUES (?, ?, ?, ?, ?)
+        """, id_orden, data.get('id_vehiculo'), data.get('id_mecanico'), fecha_inicio, fecha_fin_est)
+        id_orden_pers = cursor.fetchone()[0]
+
+        for s in servicios_rows:
+            cursor.execute("""
+                INSERT INTO ServiciosOrden (id_orden_personalizacion, id_servicio, cantidad, subtotal)
+                VALUES (?, ?, 1, ?)
+            """, id_orden_pers, s['id_servicio'], float(s['costo']))
+
+        conn.commit()
+        return jsonify({
+            'mensaje': 'Orden de personalización creada',
+            'id_orden': id_orden,
+            'costo_total': costo_total
+        }), 201
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    finally:
+        conn.close()
+
+# ─── PAGOS ───────────────────────────────────────────────────────────────────
+
+@app.route('/pagos', methods=['POST'])
+def registrar_pago():
+    data = request.json
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute("""
+            INSERT INTO Pagos (id_orden, id_metodo_pago, monto, estado_pago)
+            VALUES (?, ?, ?, 'completado')
+        """, data['id_orden'], data['id_metodo_pago'], data['monto'])
+        cursor.execute("UPDATE Ordenes SET estado = 'en proceso' WHERE id_orden = ?", data['id_orden'])
+        conn.commit()
+        return jsonify({'mensaje': 'Pago registrado con éxito', 'estado': 'completado'}), 201
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    finally:
+        conn.close()
+
+
+@app.route('/metodos-pago', methods=['GET'])
+def get_metodos_pago():
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM MetodosPago WHERE activo = 1")
+        return jsonify(filas_a_dict(cursor))
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    finally:
+        conn.close()
 
 # ─── CITAS ───────────────────────────────────────────────────────────────────
 
@@ -220,12 +319,11 @@ def get_citas_cliente(id):
             WHERE c.id_cliente = ?
             ORDER BY c.fecha_cita ASC
         """, id)
-        columnas = [col[0] for col in cursor.description]
-        citas = [dict(zip(columnas, row)) for row in cursor.fetchall()]
-        conn.close()
-        return jsonify(citas)
+        return jsonify(filas_a_dict(cursor))
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    finally:
+        conn.close()
 
 
 @app.route('/citas', methods=['POST'])
@@ -239,13 +337,13 @@ def crear_cita():
             VALUES (?, ?, ?, 'confirmada', ?)
         """, data['id_cliente'], data['tipo_cita'], data['fecha_cita'], data.get('id_mecanico'))
         conn.commit()
-        conn.close()
         return jsonify({'mensaje': 'Cita agendada correctamente'}), 201
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    finally:
+        conn.close()
 
-
-# ─── TABLERO ─────────────────────────────────────────────────────────────────
+# ─── TABLERO & RESEÑAS ───────────────────────────────────────────────────────
 
 @app.route('/tablero', methods=['GET'])
 def get_tablero():
@@ -253,15 +351,12 @@ def get_tablero():
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM VistaTableroControl")
-        columnas = [col[0] for col in cursor.description]
-        filas = [dict(zip(columnas, row)) for row in cursor.fetchall()]
-        conn.close()
-        return jsonify(filas)
+        return jsonify(filas_a_dict(cursor))
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    finally:
+        conn.close()
 
-
-# ─── RESEÑAS ─────────────────────────────────────────────────────────────────
 
 @app.route('/resenas', methods=['POST'])
 def crear_resena():
@@ -272,15 +367,15 @@ def crear_resena():
         cursor.execute("""
             INSERT INTO Resenas (id_orden, calificacion, comentario)
             VALUES (?, ?, ?)
-        """, data['id_orden'], data['calificacion'], data.get('comentario'))
+        """, data['id_orden'], data['calificacion'], data.get('comentario', ''))
         conn.commit()
-        conn.close()
         return jsonify({'mensaje': 'Reseña registrada'}), 201
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    finally:
+        conn.close()
 
-
-# ─── INICIO ──────────────────────────────────────────────────────────────────
+# ─── ARRANQUE ────────────────────────────────────────────────────────────────
 
 if __name__ == '__main__':
     print("🚀 Servidor CARSTOONS corriendo en http://localhost:3000")

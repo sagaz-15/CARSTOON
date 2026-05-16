@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CARSTOONS — Mi Cuenta</title>
+  <link rel="stylesheet" href="Style/style.css">
+  <style>
+    .dash-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;
+    }
+    .dash-header h2 { margin: 0; }
+    .dash-header h2::after { display: none; }
+    .welcome { color: var(--gray); font-size: .95rem; letter-spacing: 1px; margin-top: .3rem; }
+    .logout-btn {
+      background: transparent; border: 1px solid var(--red); color: var(--red);
+      font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 3px;
+      padding: .5rem 1.4rem; border-radius: 4px; cursor: pointer; transition: .2s;
+    }
+    .logout-btn:hover { background: var(--red); color: #fff; }
+
+    .dash-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
+    .dash-stat {
+      background: var(--dark2); border: 1px solid var(--border); border-top: 3px solid var(--red);
+      border-radius: 8px; padding: 1.5rem; text-align: center;
+    }
+    .dash-stat .num { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--red); }
+    .dash-stat p { color: var(--gray); font-size: .85rem; letter-spacing: 2px; text-transform: uppercase; margin: 0; }
+
+    .action-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 3rem; }
+    .action-card {
+      background: var(--dark2); border: 1px solid var(--border); border-radius: 8px;
+      padding: 2rem; text-align: center; transition: .3s;
+    }
+    .action-card:hover { border-color: var(--red); box-shadow: 0 0 20px var(--red-glow); }
+    .action-card .icon { font-size: 3rem; display: block; margin-bottom: 1rem; }
+    .action-card h3 { color: var(--white); font-family: 'Bebas Neue', sans-serif; letter-spacing: 3px; margin-bottom: .5rem; }
+    .action-card p { color: #999; font-size: .9rem; margin-bottom: 1.5rem; }
+    .action-btn {
+      display: inline-block; background: var(--red); color: #fff;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 3px;
+      padding: .6rem 1.8rem; border-radius: 4px; text-decoration: none;
+      transition: .2s; box-shadow: 0 0 12px var(--red-glow);
+    }
+    .action-btn:hover { background: var(--red-dark); }
+
+    .ordenes-section h3 { margin-bottom: 1rem; }
+    .orden-card {
+      background: var(--dark2); border: 1px solid var(--border); border-left: 4px solid var(--red);
+      border-radius: 6px; padding: 1.2rem 1.5rem; margin-bottom: 1rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+    }
+    .orden-info h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: var(--white); letter-spacing: 2px; margin-bottom: .3rem; }
+    .orden-info p { color: #999; font-size: .88rem; margin: 0; }
+    .orden-meta { text-align: right; }
+    .orden-meta .costo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--red); }
+    .badge-estado {
+      display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; padding: .25rem .7rem; border-radius: 3px; margin-top: .3rem;
+    }
+    .badge-pendiente { background: rgba(255,200,0,.15); color: #ffc800; border: 1px solid #ffc800; }
+    .badge-proceso   { background: rgba(0,150,255,.15); color: #0096ff; border: 1px solid #0096ff; }
+    .badge-completada{ background: rgba(0,200,100,.15); color: #00c864; border: 1px solid #00c864; }
+
+    .pagar-btn {
+      background: var(--red); color: #fff; border: none;
+      font-family: 'Bebas Neue', sans-serif; font-size: .95rem; letter-spacing: 2px;
+      padding: .5rem 1.2rem; border-radius: 4px; cursor: pointer; transition: .2s;
+      text-decoration: none; display: inline-block;
+    }
+    .pagar-btn:hover { background: var(--red-dark); }
+
+    .empty-msg { color: var(--gray); text-align: center; padding: 2rem; font-size: .95rem; }
+
+    @media (max-width: 768px) {
+      .dash-grid, .action-cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>CAR<span>S</span>TOONS</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">INICIO</a></li>
+        <li><a href="Cars.html">CARROS</a></li>
+        <li><a href="Service.html">SERVICIO</a></li>
+        <li><a href="Branches.html">SUCURSALES</a></li>
+        <li><a href="About.html">NOSOTROS</a></li>
+        <li><a href="Contact.html">CONTACTO</a></li>
+        <li><a href="dashboard.html" style="color:var(--red)">MI CUENTA</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="dash-header">
+      <div>
+        <h2>MI CUENTA</h2>
+        <p class="welcome" id="welcomeMsg">Cargando...</p>
+      </div>
+      <button class="logout-btn" onclick="cerrarSesion()">CERRAR SESIÓN</button>
+    </div>
+
+    <!-- Stats -->
+    <div class="dash-grid">
+      <div class="dash-stat">
+        <div class="num" id="totalOrdenes">—</div>
+        <p>Órdenes totales</p>
+      </div>
+      <div class="dash-stat">
+        <div class="num" id="ordenesPendientes">—</div>
+        <p>Pendientes de pago</p>
+      </div>
+    </div>
+
+    <!-- Acciones rápidas -->
+    <h3>¿QUÉ DESEAS HACER?</h3>
+    <div class="action-cards">
+      <div class="action-card">
+        <span class="icon">🚗</span>
+        <h3>Arrendar un Auto</h3>
+        <p>Elige entre nuestra flota de vehículos personalizados disponibles y reserva por los días que necesites.</p>
+        <a href="Cars.html" class="action-btn">VER AUTOS</a>
+      </div>
+      <div class="action-card">
+        <span class="icon">🎨</span>
+        <h3>Personalizar mi Auto</h3>
+        <p>Envía tu vehículo a nuestro taller y elige entre nuestros servicios de personalización.</p>
+        <a href="Personalizacion.html" class="action-btn">PERSONALIZAR</a>
+      </div>
+    </div>
+
+    <!-- Mis órdenes -->
+    <div class="ordenes-section">
+      <h3>MIS ÓRDENES</h3>
+      <div id="listaOrdenes"><p class="empty-msg">Cargando órdenes...</p></div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 CARSTOONS — Todos los derechos reservados | Medellín, Colombia</p>
+  </footer>
+
+  <script src="Style/api.js"></script>
+  <script>
+    Session.requerirLogin();
+    const usuario = Session.obtener();
+
+    document.getElementById('welcomeMsg').textContent = `Bienvenido, ${usuario.nombre} — ${usuario.ciudad || ''}`;
+
+    async function cargarOrdenes() {
+      const ordenes = await apiGet(`/ordenes/cliente/${usuario.id_usuario}`);
+      const lista   = document.getElementById('listaOrdenes');
+
+      document.getElementById('totalOrdenes').textContent = ordenes.length;
+      const pendientes = ordenes.filter(o => o.estado === 'pendiente').length;
+      document.getElementById('ordenesPendientes').textContent = pendientes;
+
+      if (!ordenes.length) {
+        lista.innerHTML = '<p class="empty-msg">Aún no tienes órdenes. ¡Empieza arrendarando o personalizando un auto!</p>';
+        return;
+      }
+
+      lista.innerHTML = ordenes.map(o => {
+        const badgeClass = o.estado === 'completada' ? 'badge-completada'
+                         : o.estado === 'en proceso'  ? 'badge-proceso'
+                         : 'badge-pendiente';
+        const botonPagar = o.estado === 'pendiente'
+          ? `<a href="Pago.html?id_orden=${o.id_orden}&monto=${o.costo_total}" class="pagar-btn">PAGAR</a>`
+          : '';
+        return `
+          <div class="orden-card">
+            <div class="orden-info">
+              <h4>${o.tipo_orden.toUpperCase()} #${o.id_orden}</h4>
+              <p>${o.descripcion || '—'}</p>
+              <p>${formatFecha(o.fecha_creacion)}</p>
+            </div>
+            <div class="orden-meta">
+              <div class="costo">${formatPeso(o.costo_total)}</div>
+              <span class="badge-estado ${badgeClass}">${o.estado}</span>
+              <br>${botonPagar}
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    function cerrarSesion() {
+      Session.cerrar();
+      window.location.href = 'index.html';
+    }
+
+    cargarOrdenes();
+  </script>
+</body>
+</html>

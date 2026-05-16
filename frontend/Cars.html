@@ -7,27 +7,63 @@
   <link rel="stylesheet" href="Style/style.css">
   <style>
     .badge {
-      display: inline-block;
-      background: var(--red);
-      color: #fff;
-      font-size: .7rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      padding: .2rem .6rem;
-      border-radius: 3px;
-      text-transform: uppercase;
-      margin-bottom: .5rem;
+      display: inline-block; background: var(--red); color: #fff;
+      font-size: .7rem; font-weight: 700; letter-spacing: 2px;
+      padding: .2rem .6rem; border-radius: 3px; text-transform: uppercase; margin-bottom: .5rem;
     }
     .car-card-body h3 { color: var(--white); }
-    .car-tag {
-      font-size: .78rem;
-      color: var(--red);
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: .3rem;
-      display: block;
+    .precio-tag { color: var(--red); font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 2px; margin: .5rem 0; }
+    .arrendar-btn {
+      display: block; width: 100%; background: var(--red); color: #fff; border: none;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 3px;
+      padding: .65rem; border-radius: 4px; cursor: pointer; transition: .2s;
+      margin-top: .8rem; text-align: center;
     }
+    .arrendar-btn:hover { background: var(--red-dark); }
+    .loading { text-align: center; color: var(--gray); padding: 3rem; font-size: 1.1rem; }
+
+    /* Modal de renta */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,.8); z-index: 200;
+      display: flex; align-items: center; justify-content: center; padding: 1rem;
+      opacity: 0; pointer-events: none; transition: .25s;
+    }
+    .modal-overlay.active { opacity: 1; pointer-events: all; }
+    .modal {
+      background: var(--dark2); border: 1px solid var(--border); border-top: 3px solid var(--red);
+      border-radius: 10px; padding: 2rem; width: 100%; max-width: 480px;
+      transform: translateY(30px); transition: .25s;
+    }
+    .modal-overlay.active .modal { transform: translateY(0); }
+    .modal h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--red); letter-spacing: 3px; margin-bottom: 1.2rem; }
+    .form-group { margin-bottom: 1.1rem; }
+    .form-group label { display: block; font-size: .75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); margin-bottom: .4rem; }
+    .form-group input {
+      width: 100%; background: var(--dark); border: 1px solid var(--border);
+      color: var(--white); font-family: 'Rajdhani', sans-serif; font-size: 1rem;
+      padding: .65rem 1rem; border-radius: 4px; outline: none; transition: .2s;
+    }
+    .form-group input:focus { border-color: var(--red); box-shadow: 0 0 8px var(--red-glow); }
+    .resumen-precio { background: var(--dark); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; margin: 1rem 0; }
+    .resumen-precio p { margin: 0; color: #bbb; font-size: .9rem; }
+    .resumen-precio .total { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--red); }
+    .modal-btns { display: flex; gap: 1rem; margin-top: 1rem; }
+    .btn-confirmar {
+      flex: 1; background: var(--red); color: #fff; border: none;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 3px;
+      padding: .75rem; border-radius: 4px; cursor: pointer; transition: .2s;
+    }
+    .btn-confirmar:hover { background: var(--red-dark); }
+    .btn-confirmar:disabled { opacity: .6; cursor: not-allowed; }
+    .btn-cancelar {
+      flex: 1; background: transparent; color: var(--gray); border: 1px solid var(--border);
+      font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 3px;
+      padding: .75rem; border-radius: 4px; cursor: pointer; transition: .2s;
+    }
+    .btn-cancelar:hover { border-color: var(--red); color: var(--red); }
+    .msg { padding: .6rem 1rem; border-radius: 4px; font-size: .88rem; margin-bottom: .8rem; display: none; }
+    .msg.error   { background: rgba(232,28,28,.15); border: 1px solid var(--red); color: #ff6b6b; }
+    .msg.success { background: rgba(0,200,100,.1); border: 1px solid #00c864; color: #00c864; }
   </style>
 </head>
 <body>
@@ -42,87 +78,178 @@
         <li><a href="Branches.html">SUCURSALES</a></li>
         <li><a href="About.html">NOSOTROS</a></li>
         <li><a href="Contact.html">CONTACTO</a></li>
-        <li><a href="Login.html">INICIAR SESIÓN</a></li>
-        <li><a href="Registro.html">REGISTRARSE</a></li>
+        <li id="navAuth"><a href="Login.html">INICIAR SESIÓN</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
     <h2>NUESTROS AUTOS</h2>
-    <p>Explora nuestra selección de vehículos personalizados. Cada uno es una obra de arte única, diseñada con pasión y precisión. Haz clic en cualquier auto para conocer más detalles y agendar tu visita.</p>
-
-    <div class="catalog-grid">
-
-      <div class="car-card">
-        <img src="style/MCQeen.jpg" alt="Auto McQueen">
-        <div class="car-card-body">
-          <span class="badge">Deportivo</span>
-          <h3>MCQUEEN Personalizado</h3>
-          <p>Un auto deportivo que combina estilo cinematográfico y alto rendimiento en cada curva.</p>
-        </div>
-      </div>
-
-      <div class="car-card">
-        <img src="style/Deluxo.jpg" alt="Auto Deluxo">
-        <div class="car-card-body">
-          <span class="badge">Clásico</span>
-          <h3>DELUXO Personalizado</h3>
-          <p>Elegancia vintage reinventada con un diseño personalizado que resalta su encanto atemporal.</p>
-        </div>
-      </div>
-
-      <div class="car-card">
-        <img src="style/Gumball.jpg" alt="Auto Gumball">
-        <div class="car-card-body">
-          <span class="badge">Familiar</span>
-          <h3>GUMBALL Personalizado</h3>
-          <p>Comodidad y estilo para toda la familia, con un diseño divertido y lleno de color.</p>
-        </div>
-      </div>
-
-      <div class="car-card">
-        <img src="style/DRAGON.jpg" alt="Auto Dragon Ball">
-        <div class="car-card-body">
-          <span class="badge">Eléctrico</span>
-          <h3>DRAGON BALL Personalizado</h3>
-          <p>Innovación y sostenibilidad fusionadas con un diseño épico inspirado en el anime.</p>
-        </div>
-      </div>
-
-      <div class="car-card">
-        <img src="style/Halo.jpg" alt="Camioneta Halo">
-        <div class="car-card-body">
-          <span class="badge">Camioneta</span>
-          <h3>HALO Personalizado</h3>
-          <p>Versatilidad y potencia con un diseño futurista inspirado en el universo de Halo.</p>
-        </div>
-      </div>
-
-      <div class="car-card">
-        <img src="style/Jujutsu.jpg" alt="Auto Jujutsu Kaisen">
-        <div class="car-card-body">
-          <span class="badge">Lujo</span>
-          <h3>JUJUTSU KAISEN Personalizado</h3>
-          <p>Elegancia y exclusividad para los amantes del anime y el lujo sobre ruedas.</p>
-        </div>
-      </div>
-
-      <div class="car-card">
-        <img src="style/Miku.jpg" alt="Auto Miku">
-        <div class="car-card-body">
-          <span class="badge">Deportivo</span>
-          <h3>MIKU Personalizado</h3>
-          <p>Velocidad, color y personalidad única en un auto que no pasa desapercibido.</p>
-        </div>
-      </div>
-
+    <p>Selecciona el vehículo que deseas arrendar. Los precios son por día en pesos colombianos.</p>
+    <div class="catalog-grid" id="catalogGrid">
+      <p class="loading">Cargando vehículos disponibles...</p>
     </div>
   </main>
 
+  <!-- Modal de renta -->
+  <div class="modal-overlay" id="modalRenta">
+    <div class="modal">
+      <h3 id="modalTitulo">ARRENDAR VEHÍCULO</h3>
+      <div class="msg" id="modalMsg"></div>
+      <div class="form-group">
+        <label>Fecha de inicio</label>
+        <input type="date" id="fechaInicio" onchange="calcularCosto()">
+      </div>
+      <div class="form-group">
+        <label>Fecha de devolución</label>
+        <input type="date" id="fechaFin" onchange="calcularCosto()">
+      </div>
+      <div class="resumen-precio" id="resumenPrecio" style="display:none">
+        <p id="resumenDias"></p>
+        <div class="total" id="resumenTotal"></div>
+      </div>
+      <div class="modal-btns">
+        <button class="btn-cancelar" onclick="cerrarModal()">CANCELAR</button>
+        <button class="btn-confirmar" id="btnConfirmar" onclick="confirmarRenta()">CONFIRMAR RENTA</button>
+      </div>
+    </div>
+  </div>
+
   <footer>
-    <p>© 2026 CARSTOONS — Todos los derechos reservados &nbsp;|&nbsp; Medellín, Colombia</p>
+    <p>© 2026 CARSTOONS — Todos los derechos reservados | Medellín, Colombia</p>
   </footer>
 
+  <script src="Style/api.js"></script>
+  <script>
+    let vehiculoSeleccionado = null;
+
+    // Actualizar nav si está logueado
+    const usuario = Session.obtener();
+    if (usuario) {
+      document.getElementById('navAuth').innerHTML = `<a href="dashboard.html" style="color:var(--red)">MI CUENTA</a>`;
+    }
+
+    // Imágenes locales por modelo (ajusta los nombres a tus archivos)
+    const imagenesLocales = {
+      'Mustang GT': 'style/MCQeen.jpg',
+      'X5':         'style/Deluxo.jpg',
+      'GT-R':       'style/Gumball.jpg',
+    };
+
+    async function cargarVehiculos() {
+      const vehiculos = await apiGet('/vehiculos');
+      const grid = document.getElementById('catalogGrid');
+
+      if (!vehiculos.length) {
+        grid.innerHTML = '<p style="color:var(--gray);text-align:center;padding:2rem">No hay vehículos disponibles en este momento.</p>';
+        return;
+      }
+
+      grid.innerHTML = vehiculos.map(v => {
+        const img = imagenesLocales[v.modelo] || 'style/MCQeen.jpg';
+        return `
+          <div class="car-card">
+            <img src="${img}" alt="${v.marca} ${v.modelo}">
+            <div class="car-card-body">
+              <span class="badge">${v.color || 'Disponible'}</span>
+              <h3>${v.marca} ${v.modelo} ${v.anio}</h3>
+              <p>${v.descripcion || ''}</p>
+              <div class="precio-tag">${formatPeso(v.precio_renta_diaria)} / día</div>
+              <button class="arrendar-btn" onclick="abrirModal(${JSON.stringify(v).replace(/"/g, '&quot;')})">
+                ARRENDAR ESTE AUTO
+              </button>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    function abrirModal(vehiculo) {
+      if (!Session.obtener()) {
+        window.location.href = 'Login.html';
+        return;
+      }
+      vehiculoSeleccionado = vehiculo;
+      document.getElementById('modalTitulo').textContent = `ARRENDAR — ${vehiculo.marca} ${vehiculo.modelo}`;
+      document.getElementById('resumenPrecio').style.display = 'none';
+      document.getElementById('modalMsg').style.display = 'none';
+
+      // Fecha mínima: hoy
+      const hoy = new Date().toISOString().split('T')[0];
+      document.getElementById('fechaInicio').min = hoy;
+      document.getElementById('fechaFin').min = hoy;
+      document.getElementById('fechaInicio').value = '';
+      document.getElementById('fechaFin').value = '';
+
+      document.getElementById('modalRenta').classList.add('active');
+    }
+
+    function cerrarModal() {
+      document.getElementById('modalRenta').classList.remove('active');
+      vehiculoSeleccionado = null;
+    }
+
+    function calcularCosto() {
+      const fi = document.getElementById('fechaInicio').value;
+      const ff = document.getElementById('fechaFin').value;
+      if (!fi || !ff || !vehiculoSeleccionado) return;
+
+      const dias = Math.ceil((new Date(ff) - new Date(fi)) / (1000 * 60 * 60 * 24));
+      if (dias <= 0) return;
+
+      const total = dias * vehiculoSeleccionado.precio_renta_diaria;
+      document.getElementById('resumenDias').textContent = `${dias} día(s) × ${formatPeso(vehiculoSeleccionado.precio_renta_diaria)}`;
+      document.getElementById('resumenTotal').textContent = formatPeso(total);
+      document.getElementById('resumenPrecio').style.display = 'block';
+    }
+
+    async function confirmarRenta() {
+      const fi  = document.getElementById('fechaInicio').value;
+      const ff  = document.getElementById('fechaFin').value;
+      const btn = document.getElementById('btnConfirmar');
+
+      if (!fi || !ff) { mostrarModalMsg('Selecciona las fechas.', 'error'); return; }
+      if (new Date(ff) <= new Date(fi)) { mostrarModalMsg('La fecha de fin debe ser posterior al inicio.', 'error'); return; }
+
+      const usuario = Session.obtener();
+      btn.disabled = true;
+      btn.textContent = 'PROCESANDO...';
+
+      const dias  = Math.ceil((new Date(ff) - new Date(fi)) / (1000 * 60 * 60 * 24));
+      const monto = dias * vehiculoSeleccionado.precio_renta_diaria;
+
+      const { ok, data } = await apiPost('/ordenes/renta', {
+        id_cliente:      usuario.id_usuario,
+        id_vehiculo:     vehiculoSeleccionado.id_vehiculo,
+        nombre_vehiculo: `${vehiculoSeleccionado.marca} ${vehiculoSeleccionado.modelo}`,
+        fecha_inicio:    fi,
+        fecha_fin:       ff,
+        precio_por_dia:  vehiculoSeleccionado.precio_renta_diaria,
+        monto_deposito:  vehiculoSeleccionado.precio_renta_diaria
+      });
+
+      if (ok) {
+        // Redirigir al pago
+        window.location.href = `Pago.html?id_orden=${data.id_orden}&monto=${data.costo_total}`;
+      } else {
+        mostrarModalMsg(data.error || 'Error al crear la orden.', 'error');
+        btn.disabled = false;
+        btn.textContent = 'CONFIRMAR RENTA';
+      }
+    }
+
+    function mostrarModalMsg(msg, tipo) {
+      const el = document.getElementById('modalMsg');
+      el.textContent = msg;
+      el.className = `msg ${tipo}`;
+      el.style.display = 'block';
+    }
+
+    // Cerrar modal clickeando fuera
+    document.getElementById('modalRenta').addEventListener('click', function(e) {
+      if (e.target === this) cerrarModal();
+    });
+
+    cargarVehiculos();
+  </script>
 </body>
 </html>

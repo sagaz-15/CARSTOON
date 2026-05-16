@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CARSTOONS — Personalización</title>
+  <link rel="stylesheet" href="Style/style.css">
+  <style>
+    .form-card {
+      background: var(--dark2); border: 1px solid var(--border);
+      border-top: 3px solid var(--red); border-radius: 10px; padding: 2.5rem 2rem;
+      max-width: 700px; margin: 0 auto;
+    }
+    .form-group { margin-bottom: 1.3rem; }
+    .form-group label { display: block; font-size: .75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); margin-bottom: .4rem; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; background: var(--dark); border: 1px solid var(--border);
+      color: var(--white); font-family: 'Rajdhani', sans-serif; font-size: 1rem;
+      padding: .75rem 1rem; border-radius: 4px; outline: none; transition: .2s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: var(--red); box-shadow: 0 0 8px var(--red-glow);
+    }
+    .form-group select option { background: var(--dark2); }
+    .form-group textarea { min-height: 100px; resize: vertical; }
+
+    .servicios-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: .5rem; }
+    .servicio-item {
+      background: var(--dark); border: 1px solid var(--border); border-radius: 6px;
+      padding: 1rem; cursor: pointer; transition: .2s; position: relative;
+    }
+    .servicio-item:hover { border-color: var(--red); }
+    .servicio-item.selected { border-color: var(--red); background: rgba(232,28,28,.1); }
+    .servicio-item input[type=checkbox] { position: absolute; top: .8rem; right: .8rem; accent-color: var(--red); width: 16px; height: 16px; }
+    .servicio-item h4 { font-family: 'Bebas Neue', sans-serif; color: var(--white); letter-spacing: 2px; margin-bottom: .3rem; font-size: 1rem; }
+    .servicio-item p { color: #999; font-size: .82rem; margin: 0 0 .4rem; }
+    .servicio-item .costo { color: var(--red); font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; }
+
+    .resumen-total {
+      background: var(--dark); border: 1px solid var(--border); border-radius: 6px;
+      padding: 1rem 1.5rem; margin: 1.5rem 0; display: flex; justify-content: space-between; align-items: center;
+    }
+    .resumen-total span { color: var(--gray); font-size: .9rem; letter-spacing: 2px; text-transform: uppercase; }
+    .resumen-total .total-num { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--red); }
+
+    .submit-btn {
+      width: 100%; background: var(--red); color: #fff; border: none;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 4px;
+      padding: .9rem; border-radius: 4px; cursor: pointer; transition: .25s;
+      box-shadow: 0 0 18px var(--red-glow);
+    }
+    .submit-btn:hover { background: var(--red-dark); transform: translateY(-2px); }
+    .submit-btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+    .msg { padding: .7rem 1rem; border-radius: 4px; font-size: .9rem; margin-bottom: 1rem; display: none; }
+    .msg.error   { background: rgba(232,28,28,.15); border: 1px solid var(--red); color: #ff6b6b; }
+    .msg.success { background: rgba(0,200,100,.1); border: 1px solid #00c864; color: #00c864; }
+
+    @media (max-width: 600px) { .servicios-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>CAR<span>S</span>TOONS</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">INICIO</a></li>
+        <li><a href="Cars.html">CARROS</a></li>
+        <li><a href="Service.html">SERVICIO</a></li>
+        <li><a href="Branches.html">SUCURSALES</a></li>
+        <li><a href="About.html">NOSOTROS</a></li>
+        <li><a href="Contact.html">CONTACTO</a></li>
+        <li><a href="dashboard.html" style="color:var(--red)">MI CUENTA</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h2>PERSONALIZA TU AUTO</h2>
+    <p>Selecciona los servicios que deseas aplicar a tu vehículo. Un mecánico especializado será asignado a tu orden.</p>
+
+    <div class="form-card">
+      <div class="msg" id="msgBox"></div>
+
+      <div class="form-group">
+        <label>Marca de tu vehículo</label>
+        <input type="text" id="marca" placeholder="Ej: Toyota, Honda, Ford...">
+      </div>
+      <div class="form-group">
+        <label>Modelo</label>
+        <input type="text" id="modelo" placeholder="Ej: Corolla, Civic, Mustang...">
+      </div>
+      <div class="form-group">
+        <label>Placa</label>
+        <input type="text" id="placa" placeholder="Ej: ABC123">
+      </div>
+      <div class="form-group">
+        <label>Fecha estimada de entrega</label>
+        <input type="date" id="fechaFin">
+      </div>
+      <div class="form-group">
+        <label>Mecánico</label>
+        <select id="mecanico">
+          <option value="">Asignar automáticamente</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Descripción adicional (opcional)</label>
+        <textarea id="descripcion" placeholder="Cuéntanos qué tienes en mente para tu auto..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Selecciona los servicios</label>
+        <div class="servicios-grid" id="serviciosGrid">
+          <p style="color:var(--gray)">Cargando servicios...</p>
+        </div>
+      </div>
+
+      <div class="resumen-total">
+        <span>Total estimado</span>
+        <div class="total-num" id="totalEstimado">$ 0</div>
+      </div>
+
+      <button class="submit-btn" id="btnEnviar" onclick="enviarOrden()">ENVIAR ORDEN</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 CARSTOONS — Todos los derechos reservados | Medellín, Colombia</p>
+  </footer>
+
+  <script src="Style/api.js"></script>
+  <script>
+    Session.requerirLogin();
+
+    let serviciosDisponibles = [];
+
+    async function cargarDatos() {
+      // Cargar servicios
+      serviciosDisponibles = await apiGet('/servicios');
+      const grid = document.getElementById('serviciosGrid');
+      grid.innerHTML = serviciosDisponibles.map(s => `
+        <div class="servicio-item" id="item-${s.id_servicio}" onclick="toggleServicio(${s.id_servicio})">
+          <input type="checkbox" id="chk-${s.id_servicio}" onclick="event.stopPropagation()">
+          <h4>${s.nombre}</h4>
+          <p>${s.descripcion || ''}</p>
+          <span class="costo">${formatPeso(s.costo)}</span>
+          <p style="color:#666;font-size:.78rem;margin-top:.2rem">${s.tiempo_estimado_horas}h estimadas · ${s.especializacion}</p>
+        </div>
+      `).join('');
+
+      // Cargar mecánicos
+      const mecanicos = await apiGet('/mecanicos');
+      const sel = document.getElementById('mecanico');
+      mecanicos.forEach(m => {
+        const opt = document.createElement('option');
+        opt.value = m.id_mecanico;
+        opt.textContent = `${m.nombre} — ${m.especializacion} (⭐ ${m.calificacion})`;
+        sel.appendChild(opt);
+      });
+
+      // Fecha mínima
+      document.getElementById('fechaFin').min = new Date().toISOString().split('T')[0];
+    }
+
+    function toggleServicio(id) {
+      const item = document.getElementById(`item-${id}`);
+      const chk  = document.getElementById(`chk-${id}`);
+      chk.checked = !chk.checked;
+      item.classList.toggle('selected', chk.checked);
+      actualizarTotal();
+    }
+
+    function actualizarTotal() {
+      const seleccionados = serviciosDisponibles.filter(s => document.getElementById(`chk-${s.id_servicio}`)?.checked);
+      const total = seleccionados.reduce((sum, s) => sum + parseFloat(s.costo), 0);
+      document.getElementById('totalEstimado').textContent = formatPeso(total);
+    }
+
+    async function enviarOrden() {
+      const usuario     = Session.obtener();
+      const marca       = document.getElementById('marca').value.trim();
+      const modelo      = document.getElementById('modelo').value.trim();
+      const placa       = document.getElementById('placa').value.trim();
+      const fechaFin    = document.getElementById('fechaFin').value;
+      const mecanico    = document.getElementById('mecanico').value;
+      const descripcion = document.getElementById('descripcion').value.trim();
+      const btn         = document.getElementById('btnEnviar');
+
+      const seleccionados = serviciosDisponibles
+        .filter(s => document.getElementById(`chk-${s.id_servicio}`)?.checked)
+        .map(s => s.id_servicio);
+
+      if (!marca || !modelo) { mostrarMsg('Ingresa la marca y modelo de tu auto.', 'error'); return; }
+      if (!seleccionados.length) { mostrarMsg('Selecciona al menos un servicio.', 'error'); return; }
+
+      btn.disabled = true;
+      btn.textContent = 'ENVIANDO ORDEN...';
+
+      const { ok, data } = await apiPost('/ordenes/personalizacion', {
+        id_cliente:         usuario.id_usuario,
+        id_servicios:       seleccionados,
+        id_mecanico:        mecanico || null,
+        fecha_fin_estimada: fechaFin || null,
+        descripcion:        `Personalización de ${marca} ${modelo}${placa ? ` (${placa})` : ''}. ${descripcion}`
+      });
+
+      if (ok) {
+        window.location.href = `Pago.html?id_orden=${data.id_orden}&monto=${data.costo_total}`;
+      } else {
+        mostrarMsg(data.error || 'Error al crear la orden.', 'error');
+        btn.disabled = false;
+        btn.textContent = 'ENVIAR ORDEN';
+      }
+    }
+
+    function mostrarMsg(msg, tipo) {
+      const el = document.getElementById('msgBox');
+      el.textContent = msg;
+      el.className = `msg ${tipo}`;
+      el.style.display = 'block';
+    }
+
+    cargarDatos();
+  </script>
+</body>
+</html>
