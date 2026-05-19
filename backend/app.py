@@ -1,10 +1,22 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 from db import get_connection
 from datetime import datetime
+import os
 
 app = Flask(__name__)
 CORS(app)
+
+# ─── FRONTEND ESTÁTICO ────────────────────────────────────────────────────────
+# Ajusta esta ruta a la carpeta frontend de tu proyecto
+FRONTEND_DIR = os.path.join(os.path.dirname(__file__), '..', 'frontend')
+
+@app.route('/', defaults={'path': 'index.html'})
+@app.route('/<path:path>')
+def serve_frontend(path):
+    # Si la ruta corresponde a un endpoint de la API, Flask lo ignora aquí
+    # porque las rutas de API se registran antes y tienen prioridad
+    return send_from_directory(FRONTEND_DIR, path)
 
 # ─── HELPER ──────────────────────────────────────────────────────────────────
 
@@ -378,5 +390,5 @@ def crear_resena():
 # ─── ARRANQUE ────────────────────────────────────────────────────────────────
 
 if __name__ == '__main__':
-    print("🚀 Servidor CARSTOONS corriendo en http://localhost:3000")
+    print(" Servidor CARSTOONS corriendo en http://localhost:3000")
     app.run(debug=True, port=3000)

@@ -1,5 +1,5 @@
 // ─── CONFIGURACIÓN ───────────────────────────────────────────────────────────
-const API = 'http://localhost:3000';
+const API = '';
 
 // ─── SESIÓN ──────────────────────────────────────────────────────────────────
 const Session = {
@@ -30,13 +30,14 @@ async function apiGet(ruta) {
     const res = await fetch(API + ruta);
     return res.json();
 }
-
 async function apiPost(ruta, body) {
+    const t = Date.now();
     const res = await fetch(API + ruta, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
     });
+    console.log(`${ruta} tardó ${Date.now() - t}ms`);
     return { ok: res.ok, status: res.status, data: await res.json() };
 }
 
