@@ -1,6 +1,9 @@
 comandos para iniciar ejecucion
 
-backend
+carpeta backend
+
 python app.py
+
+---------------------------------------------------------------
 
 ngrok http 3000
