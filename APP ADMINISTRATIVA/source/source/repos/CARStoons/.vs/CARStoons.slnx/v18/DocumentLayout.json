@@ -1,0 +1,131 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\santi\\Downloads\\source\\source\\repos\\CARStoons\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8B63865A-F0F1-5F22-0C52-4CDB12EC5431}|CARStoons\\CARStoons.csproj|c:\\users\\santi\\downloads\\source\\source\\repos\\carstoons\\carstoons\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B63865A-F0F1-5F22-0C52-4CDB12EC5431}|CARStoons\\CARStoons.csproj|solutionrelative:carstoons\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B63865A-F0F1-5F22-0C52-4CDB12EC5431}|CARStoons\\CARStoons.csproj|c:\\users\\santi\\downloads\\source\\source\\repos\\carstoons\\carstoons\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B63865A-F0F1-5F22-0C52-4CDB12EC5431}|CARStoons\\CARStoons.csproj|solutionrelative:carstoons\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B63865A-F0F1-5F22-0C52-4CDB12EC5431}|CARStoons\\CARStoons.csproj|C:\\Users\\santi\\Downloads\\source\\source\\repos\\CARStoons\\carstoons\\forminsertar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{8B63865A-F0F1-5F22-0C52-4CDB12EC5431}|CARStoons\\CARStoons.csproj|solutionrelative:carstoons\\forminsertar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B63865A-F0F1-5F22-0C52-4CDB12EC5431}|CARStoons\\CARStoons.csproj|C:\\Users\\santi\\Downloads\\source\\source\\repos\\CARStoons\\carstoons\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{8B63865A-F0F1-5F22-0C52-4CDB12EC5431}|CARStoons\\CARStoons.csproj|solutionrelative:carstoons\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E04E74A3-D007-401E-B600-B433832520DF}|CARStoons\\CARStoons.csproj|C:\\Users\\santi\\Downloads\\source\\source\\repos\\CARStoons\\carstoons\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{E04E74A3-D007-401E-B600-B433832520DF}|CARStoons\\CARStoons.csproj|solutionrelative:carstoons\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E04E74A3-D007-401E-B600-B433832520DF}|CARStoons\\CARStoons.csproj|C:\\Users\\santi\\Downloads\\source\\source\\repos\\CARStoons\\carstoons\\forminsertar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{E04E74A3-D007-401E-B600-B433832520DF}|CARStoons\\CARStoons.csproj|solutionrelative:carstoons\\forminsertar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B63865A-F0F1-5F22-0C52-4CDB12EC5431}|CARStoons\\CARStoons.csproj|c:\\users\\santi\\downloads\\source\\source\\repos\\carstoons\\carstoons\\forminsertar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B63865A-F0F1-5F22-0C52-4CDB12EC5431}|CARStoons\\CARStoons.csproj|solutionrelative:carstoons\\forminsertar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\santi\\Downloads\\source\\source\\repos\\CARStoons\\CARStoons\\Form1.cs",
+              "RelativeDocumentMoniker": "CARStoons\\Form1.cs",
+              "ToolTip": "C:\\Users\\santi\\Downloads\\source\\source\\repos\\CARStoons\\CARStoons\\Form1.cs [Design]",
+              "RelativeToolTip": "CARStoons\\Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T02:37:44.784Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FormInsertar.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\santi\\Downloads\\source\\source\\repos\\CARStoons\\CARStoons\\FormInsertar.cs",
+              "RelativeDocumentMoniker": "CARStoons\\FormInsertar.cs",
+              "ToolTip": "C:\\Users\\santi\\Downloads\\source\\source\\repos\\CARStoons\\CARStoons\\FormInsertar.cs [Design]",
+              "RelativeToolTip": "CARStoons\\FormInsertar.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T02:37:42.785Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "FormInsertar.cs",
+              "DocumentMoniker": "C:\\Users\\santi\\Downloads\\source\\source\\repos\\CARStoons\\CARStoons\\FormInsertar.cs",
+              "RelativeDocumentMoniker": "CARStoons\\FormInsertar.cs",
+              "ToolTip": "C:\\Users\\santi\\Downloads\\source\\source\\repos\\CARStoons\\CARStoons\\FormInsertar.cs",
+              "RelativeToolTip": "CARStoons\\FormInsertar.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAAAYwAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T14:18:25.227Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\santi\\Downloads\\source\\source\\repos\\CARStoons\\CARStoons\\Form1.cs",
+              "RelativeDocumentMoniker": "CARStoons\\Form1.cs",
+              "ToolTip": "C:\\Users\\santi\\Downloads\\source\\source\\repos\\CARStoons\\CARStoons\\Form1.cs",
+              "RelativeToolTip": "CARStoons\\Form1.cs",
+              "ViewState": "AgIAACUBAAAAAAAAAAAmwDABAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T12:22:51.137Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\santi\\Downloads\\source\\source\\repos\\CARStoons\\CARStoons\\Form1.Designer.cs",
+              "RelativeDocumentMoniker": "CARStoons\\Form1.Designer.cs",
+              "ToolTip": "C:\\Users\\santi\\Downloads\\source\\source\\repos\\CARStoons\\CARStoons\\Form1.Designer.cs",
+              "RelativeToolTip": "CARStoons\\Form1.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T07:35:19.926Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FormInsertar.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\santi\\Downloads\\source\\source\\repos\\CARStoons\\CARStoons\\FormInsertar.cs",
+              "RelativeDocumentMoniker": "CARStoons\\FormInsertar.cs",
+              "ToolTip": "C:\\Users\\carlo\\source\\repos\\CARStoons\\CARStoons\\FormInsertar.cs [Dise\u00F1o]",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\carlo\\source\\repos\\CARStoons\\CARStoons\\FormInsertar.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T14:18:11.569Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Form1.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\santi\\Downloads\\source\\source\\repos\\CARStoons\\CARStoons\\Form1.cs",
+              "RelativeDocumentMoniker": "CARStoons\\Form1.cs",
+              "ToolTip": "C:\\Users\\carlo\\source\\repos\\CARStoons\\CARStoons\\Form1.cs [Dise\u00F1o]",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\carlo\\source\\repos\\CARStoons\\CARStoons\\Form1.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T05:36:21.017Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
